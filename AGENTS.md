@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep TRINETRA as a frontend-only prototype with centralized mock data and browser storage, because the project demonstrates methodology without production AI or backend infrastructure.
