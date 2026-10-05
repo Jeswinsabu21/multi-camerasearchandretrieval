@@ -15,6 +15,7 @@ import { Route as CreateCaseRouteImport } from './routes/create-case'
 import { Route as EvidenceRouteImport } from './routes/evidence'
 import { Route as ProcessCaseRouteImport } from './routes/process-case'
 import { Route as ResultsRouteImport } from './routes/results'
+import { Route as SystemStatusRouteImport } from './routes/system-status'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const ResultsRoute = ResultsRouteImport.update({
   path: '/results',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SystemStatusRoute = SystemStatusRouteImport.update({
+  id: '/system-status',
+  path: '/system-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/evidence': typeof EvidenceRoute
   '/process-case': typeof ProcessCaseRoute
   '/results': typeof ResultsRoute
+  '/system-status': typeof SystemStatusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/evidence': typeof EvidenceRoute
   '/process-case': typeof ProcessCaseRoute
   '/results': typeof ResultsRoute
+  '/system-status': typeof SystemStatusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/evidence': typeof EvidenceRoute
   '/process-case': typeof ProcessCaseRoute
   '/results': typeof ResultsRoute
+  '/system-status': typeof SystemStatusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/process-case'
     | '/results'
+    | '/system-status'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/process-case'
     | '/results'
+    | '/system-status'
   id:
     | '__root__'
     | '/'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/process-case'
     | '/results'
+    | '/system-status'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   EvidenceRoute: typeof EvidenceRoute
   ProcessCaseRoute: typeof ProcessCaseRoute
   ResultsRoute: typeof ResultsRoute
+  SystemStatusRoute: typeof SystemStatusRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/system-status': {
+      id: '/system-status'
+      path: '/system-status'
+      fullPath: '/system-status'
+      preLoaderRoute: typeof SystemStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvidenceRoute: EvidenceRoute,
   ProcessCaseRoute: ProcessCaseRoute,
   ResultsRoute: ResultsRoute,
+  SystemStatusRoute: SystemStatusRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
