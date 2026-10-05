@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Camera, FileText, Image, Plus, Save, Trash2, Video } from "lucide-react";
+import { Camera, FileText, Image, Plus, Save, Trash2, Video, type LucideIcon } from "lucide-react";
 import { useState } from "react";
 import { AppShell, SectionHeader } from "../components/AppShell";
 import { Button } from "../components/Button";
