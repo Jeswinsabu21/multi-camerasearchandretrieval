@@ -9,6 +9,7 @@ const navigation = [
   { to: "/results", label: "Search & Results", icon: Search },
   { to: "/evidence", label: "Evidence", icon: Database },
   { to: "/case-history", label: "Case History", icon: History },
+  { to: "/system-status", label: "System Status", icon: ShieldCheck },
 ] as const;
 
 export function AppShell({ title, eyebrow, children }: { title: string; eyebrow: string; children: ReactNode }) {

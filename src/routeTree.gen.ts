@@ -10,11 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaseHistoryRouteImport } from './routes/case-history'
 import { Route as CreateCaseRouteImport } from './routes/create-case'
+import { Route as EvidenceRouteImport } from './routes/evidence'
+import { Route as ProcessCaseRouteImport } from './routes/process-case'
+import { Route as ResultsRouteImport } from './routes/results'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseHistoryRoute = CaseHistoryRouteImport.update({
+  id: '/case-history',
+  path: '/case-history',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreateCaseRoute = CreateCaseRouteImport.update({
@@ -22,31 +31,81 @@ const CreateCaseRoute = CreateCaseRouteImport.update({
   path: '/create-case',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EvidenceRoute = EvidenceRouteImport.update({
+  id: '/evidence',
+  path: '/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcessCaseRoute = ProcessCaseRouteImport.update({
+  id: '/process-case',
+  path: '/process-case',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsRoute = ResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/case-history': typeof CaseHistoryRoute
   '/create-case': typeof CreateCaseRoute
+  '/evidence': typeof EvidenceRoute
+  '/process-case': typeof ProcessCaseRoute
+  '/results': typeof ResultsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/case-history': typeof CaseHistoryRoute
   '/create-case': typeof CreateCaseRoute
+  '/evidence': typeof EvidenceRoute
+  '/process-case': typeof ProcessCaseRoute
+  '/results': typeof ResultsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/case-history': typeof CaseHistoryRoute
   '/create-case': typeof CreateCaseRoute
+  '/evidence': typeof EvidenceRoute
+  '/process-case': typeof ProcessCaseRoute
+  '/results': typeof ResultsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/create-case'
+  fullPaths:
+    | '/'
+    | '/case-history'
+    | '/create-case'
+    | '/evidence'
+    | '/process-case'
+    | '/results'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/create-case'
-  id: '__root__' | '/' | '/create-case'
+  to:
+    | '/'
+    | '/case-history'
+    | '/create-case'
+    | '/evidence'
+    | '/process-case'
+    | '/results'
+  id:
+    | '__root__'
+    | '/'
+    | '/case-history'
+    | '/create-case'
+    | '/evidence'
+    | '/process-case'
+    | '/results'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CaseHistoryRoute: typeof CaseHistoryRoute
   CreateCaseRoute: typeof CreateCaseRoute
+  EvidenceRoute: typeof EvidenceRoute
+  ProcessCaseRoute: typeof ProcessCaseRoute
+  ResultsRoute: typeof ResultsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-history': {
+      id: '/case-history'
+      path: '/case-history'
+      fullPath: '/case-history'
+      preLoaderRoute: typeof CaseHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/create-case': {
       id: '/create-case'
       path: '/create-case'
@@ -65,12 +131,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreateCaseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evidence': {
+      id: '/evidence'
+      path: '/evidence'
+      fullPath: '/evidence'
+      preLoaderRoute: typeof EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/process-case': {
+      id: '/process-case'
+      path: '/process-case'
+      fullPath: '/process-case'
+      preLoaderRoute: typeof ProcessCaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/results': {
+      id: '/results'
+      path: '/results'
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CaseHistoryRoute: CaseHistoryRoute,
   CreateCaseRoute: CreateCaseRoute,
+  EvidenceRoute: EvidenceRoute,
+  ProcessCaseRoute: ProcessCaseRoute,
+  ResultsRoute: ResultsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
