@@ -1,7 +1,4 @@
 # Roadmap
-- [ ] Build shared navigation and design system
-- [ ] Build dashboard and create-case workflow
-- [ ] Build processing simulation
-- [ ] Build ranked results and evidence review
-- [ ] Build evidence index and case history
-- [ ] Verify navigation, interactions, desktop, and mobile
+- [x] Replace the sidebar with the sketch's heading and three horizontal tabs
+- [x] Open the create-case workspace instead of the dashboard
+- [x] Simplify page surfaces and verify navigation and layout

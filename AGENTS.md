@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep TRINETRA as a frontend-only prototype with centralized mock data and browser storage, because the project demonstrates methodology without production AI or backend infrastructure.
+- Share the create-case screen between the home and create-case routes, and keep primary navigation in AppShell, so both entry points use the same simple workspace.

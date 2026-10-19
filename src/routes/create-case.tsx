@@ -8,7 +8,7 @@ import { saveCase } from "../services/storage";
 export const Route = createFileRoute("/create-case")({ head: () => ({ meta: [{ title: "Create Case — TRINETRA" }, { name: "description", content: "Create an investigation case with reference details and camera footage." }, { property: "og:title", content: "Create Investigation Case — TRINETRA" }, { property: "og:description", content: "Prepare a human-reviewed multi-camera evidence search case." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: CreateCase });
 type CameraItem = { id: string; name: string; location: string; start: string; end: string };
 const initialCameras: CameraItem[] = [{ id: "CAM-01", name: "Main Gate", location: "Campus Entrance", start: "10:00", end: "11:00" }, { id: "CAM-02", name: "Library Junction", location: "Central Campus", start: "10:00", end: "11:00" }, { id: "CAM-03", name: "Parking Area", location: "North Parking", start: "10:00", end: "11:00" }];
-function CreateCase() {
+export function CreateCase() {
   const navigate = useNavigate(); const [mode, setMode] = useState("text"); const [subject, setSubject] = useState("Person"); const [cameras, setCameras] = useState(initialCameras); const [saved, setSaved] = useState(false);
   const addCamera = () => setCameras([...cameras, { id: `CAM-0${cameras.length + 1}`, name: "", location: "", start: "10:00", end: "11:00" }]);
   const updateCamera = (index: number, field: keyof CameraItem, value: string) => setCameras(cameras.map((camera, i) => i === index ? { ...camera, [field]: value } : camera));
