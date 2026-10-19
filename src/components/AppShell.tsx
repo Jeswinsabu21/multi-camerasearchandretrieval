@@ -1,5 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { useQueryClient } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+import { SignInForm, useAuth } from './Auth';
+import { Button } from './Button';
 
 const navigation = [
   { to: "/create-case", label: "Create Case" },
@@ -9,6 +13,13 @@ const navigation = [
 
 export function AppShell({ title, children }: { title: string; eyebrow: string; children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const { user, ready } = useAuth();
+  const queryClient = useQueryClient();
+  async function signOut() {
+    await queryClient.cancelQueries(); queryClient.clear();
+    const { error } = await supabase.auth.signOut();
+    if (error) window.alert('Sign-out failed. Please retry.');
+  }
   return (
     <div className="app-shell">
       <header className="project-header">
@@ -21,7 +32,7 @@ export function AppShell({ title, children }: { title: string; eyebrow: string; 
         </nav>
       </header>
       <main className="main-content">
-        <div className="page-content"><h2 className="page-heading">{title}</h2>{children}</div>
+        <div className="page-content"><div className="workspace-heading"><h2 className="page-heading">{title}</h2>{user && <Button variant="ghost" onClick={() => void signOut()}>Sign out</Button>}</div>{!ready ? <p role="status">Loading…</p> : user ? children : <SignInForm />}</div>
         <footer className="responsible-notice">AI-generated candidates require human verification. Similarity does not establish identity.</footer>
       </main>
     </div>
