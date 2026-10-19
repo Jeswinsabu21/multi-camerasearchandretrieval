@@ -14,7 +14,104 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      case_evidence: {
+        Row: {
+          camera_id: string
+          captured_at: string | null
+          case_id: string
+          created_at: string
+          filename: string
+          id: string
+          location: string
+          mime_type: string
+          notes: string
+          review_note: string
+          review_status: string
+          reviewed_at: string | null
+          size_bytes: number
+          storage_path: string
+          user_id: string
+        }
+        Insert: {
+          camera_id?: string
+          captured_at?: string | null
+          case_id: string
+          created_at?: string
+          filename: string
+          id?: string
+          location?: string
+          mime_type: string
+          notes?: string
+          review_note?: string
+          review_status?: string
+          reviewed_at?: string | null
+          size_bytes: number
+          storage_path: string
+          user_id?: string
+        }
+        Update: {
+          camera_id?: string
+          captured_at?: string | null
+          case_id?: string
+          created_at?: string
+          filename?: string
+          id?: string
+          location?: string
+          mime_type?: string
+          notes?: string
+          review_note?: string
+          review_status?: string
+          reviewed_at?: string | null
+          size_bytes?: number
+          storage_path?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_evidence_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "investigation_cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      investigation_cases: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          incident_date: string | null
+          investigator: string
+          query: string
+          subject: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          incident_date?: string | null
+          investigator: string
+          query?: string
+          subject: string
+          title: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          incident_date?: string | null
+          investigator?: string
+          query?: string
+          subject?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
