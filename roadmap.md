@@ -2,5 +2,7 @@
 - [x] Replace the sidebar with the sketch's heading and three horizontal tabs
 - [x] Open the create-case workspace instead of the dashboard
 - [x] Simplify page surfaces and verify navigation and layout
-- [ ] Replace sample data with uploads and actual backend records — blocked: backend URL and API documentation needed
-- [ ] Verify uploads, searches, results, and saved case history against the user's backend — blocked: backend connection details needed
+- [x] Enable Lovable Cloud for the backend
+- [ ] Add secure sign-in, private uploads, and owner-scoped case records
+- [ ] Replace sample forms, results, processing, evidence, and case history with real records and honest empty states
+- [ ] Verify upload, saved-case history, and access isolation

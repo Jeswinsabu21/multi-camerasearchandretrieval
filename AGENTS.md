@@ -9,5 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep TRINETRA as a frontend-only prototype with centralized mock data and browser storage, because the project demonstrates methodology without production AI or backend infrastructure.
+- Use Lovable Cloud for authenticated, owner-scoped case records and private evidence uploads; never fall back to mock results or browser-stored case records, because the user now requires real persistence.
 - Share the create-case screen between the home and create-case routes, and keep primary navigation in AppShell, so both entry points use the same simple workspace.
