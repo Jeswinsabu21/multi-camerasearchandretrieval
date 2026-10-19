@@ -33,7 +33,7 @@ export function AppShell({ title, children }: { title: string; eyebrow: string; 
       </header>
       <main className="main-content">
         <div className="page-content"><div className="workspace-heading"><h2 className="page-heading">{title}</h2>{user && <Button variant="ghost" onClick={() => void signOut()}>Sign out</Button>}</div>{!ready ? <p role="status">Loading…</p> : user ? children : <SignInForm />}</div>
-        <footer className="responsible-notice">AI-generated candidates require human verification. Similarity does not establish identity.</footer>
+        <footer className="responsible-notice">Automated search candidates require human verification.</footer>
       </main>
     </div>
   );

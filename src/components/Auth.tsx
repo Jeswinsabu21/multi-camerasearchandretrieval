@@ -63,7 +63,7 @@ export function SignInForm() {
       <Button disabled={busy} type="submit">{busy ? 'Please wait…' : mode === 'signup' ? 'Create account' : mode === 'reset' ? 'Send reset link' : 'Sign in'}</Button>
     </form>
     {message && <p role="status">{message}</p>}
-    <div className="auth-actions"><Button variant="secondary" disabled={busy} onClick={() => void social('google')}>Continue with Google</Button><Button className="lovable-auth-button" disabled={busy} onClick={() => void social('lovable')}>Continue with Lovable</Button></div>
+    <div className="auth-actions"><Button variant="secondary" disabled={busy} onClick={() => void social('google')}>Continue with Google</Button></div>
     <div className="auth-actions"><Button variant="ghost" onClick={() => { setMode(mode === 'signup' ? 'signin' : 'signup'); setMessage(''); }}>{mode === 'signup' ? 'Already have an account? Sign in' : 'Create an account'}</Button><Button variant="ghost" onClick={() => { setMode(mode === 'reset' ? 'signin' : 'reset'); setMessage(''); }}>{mode === 'reset' ? 'Back to sign in' : 'Forgot password?'}</Button></div>
   </section>;
 }
