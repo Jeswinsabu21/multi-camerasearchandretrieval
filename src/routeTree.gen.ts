@@ -14,6 +14,7 @@ import { Route as CaseHistoryRouteImport } from './routes/case-history'
 import { Route as CreateCaseRouteImport } from './routes/create-case'
 import { Route as EvidenceRouteImport } from './routes/evidence'
 import { Route as ProcessCaseRouteImport } from './routes/process-case'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as SystemStatusRouteImport } from './routes/system-status'
 
@@ -42,6 +43,11 @@ const ProcessCaseRoute = ProcessCaseRouteImport.update({
   path: '/process-case',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResultsRoute = ResultsRouteImport.update({
   id: '/results',
   path: '/results',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/create-case': typeof CreateCaseRoute
   '/evidence': typeof EvidenceRoute
   '/process-case': typeof ProcessCaseRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/results': typeof ResultsRoute
   '/system-status': typeof SystemStatusRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/create-case': typeof CreateCaseRoute
   '/evidence': typeof EvidenceRoute
   '/process-case': typeof ProcessCaseRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/results': typeof ResultsRoute
   '/system-status': typeof SystemStatusRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/create-case': typeof CreateCaseRoute
   '/evidence': typeof EvidenceRoute
   '/process-case': typeof ProcessCaseRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/results': typeof ResultsRoute
   '/system-status': typeof SystemStatusRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/create-case'
     | '/evidence'
     | '/process-case'
+    | '/reset-password'
     | '/results'
     | '/system-status'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/create-case'
     | '/evidence'
     | '/process-case'
+    | '/reset-password'
     | '/results'
     | '/system-status'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/create-case'
     | '/evidence'
     | '/process-case'
+    | '/reset-password'
     | '/results'
     | '/system-status'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   CreateCaseRoute: typeof CreateCaseRoute
   EvidenceRoute: typeof EvidenceRoute
   ProcessCaseRoute: typeof ProcessCaseRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ResultsRoute: typeof ResultsRoute
   SystemStatusRoute: typeof SystemStatusRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProcessCaseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/results': {
       id: '/results'
       path: '/results'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   CreateCaseRoute: CreateCaseRoute,
   EvidenceRoute: EvidenceRoute,
   ProcessCaseRoute: ProcessCaseRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ResultsRoute: ResultsRoute,
   SystemStatusRoute: SystemStatusRoute,
 }
