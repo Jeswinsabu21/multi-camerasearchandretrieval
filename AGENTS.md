@@ -11,3 +11,5 @@
 
 - Use Lovable Cloud for authenticated, owner-scoped case records and private evidence uploads; never fall back to mock results or browser-stored case records, because the user now requires real persistence.
 - Share the create-case screen between the home and create-case routes, and keep primary navigation in AppShell, so both entry points use the same simple workspace.
+- Keep browser database and Storage API operations in the investigations service behind RLS, and use one root AuthProvider for session and cache invalidation; public shells offer inline sign-in without private SSR loaders.
+- Validate upload extension, MIME, size, and file signature before private storage upload, and compensate for failed metadata inserts by removing the uploaded object, so failures do not masquerade as success.
