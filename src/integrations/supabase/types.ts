@@ -22,7 +22,9 @@ export type Database = {
           created_at: string
           filename: string
           id: string
+          latitude: number | null
           location: string
+          longitude: number | null
           mime_type: string
           notes: string
           review_note: string
@@ -39,7 +41,9 @@ export type Database = {
           created_at?: string
           filename: string
           id?: string
+          latitude?: number | null
           location?: string
+          longitude?: number | null
           mime_type: string
           notes?: string
           review_note?: string
@@ -56,7 +60,9 @@ export type Database = {
           created_at?: string
           filename?: string
           id?: string
+          latitude?: number | null
           location?: string
+          longitude?: number | null
           mime_type?: string
           notes?: string
           review_note?: string
@@ -78,6 +84,7 @@ export type Database = {
       }
       investigation_cases: {
         Row: {
+          attributes: string[]
           created_at: string
           description: string
           id: string
@@ -89,6 +96,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          attributes?: string[]
           created_at?: string
           description?: string
           id?: string
@@ -100,6 +108,7 @@ export type Database = {
           user_id?: string
         }
         Update: {
+          attributes?: string[]
           created_at?: string
           description?: string
           id?: string

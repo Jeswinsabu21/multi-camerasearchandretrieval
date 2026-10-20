@@ -8,6 +8,13 @@
       "when": 1792396664056,
       "tag": "0000_create_private_investigations",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792489195013,
+      "tag": "0001_add_coordinates_and_attributes",
+      "breakpoints": true
     }
   ]
 }
