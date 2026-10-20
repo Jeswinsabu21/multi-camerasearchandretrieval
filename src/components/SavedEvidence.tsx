@@ -9,7 +9,7 @@ import { evidenceUrl, listCases, listEvidence, reviewEvidence, updateEvidence, u
 import { validateFileContents } from '@/lib/evidence-validation';
 import type { MapPoint } from './map-types';
 
-export function SavedEvidence({ initialCase = '', title = 'Ranked List' }: { initialCase?: string; title?: string }) {
+export function SavedEvidence({ initialCase = '', title = 'Case Details' }: { initialCase?: string; title?: string }) {
   const { user } = useAuth();
   const [chosen, setChosen] = useState(initialCase);
   const cases = useQuery({ queryKey: ['cases', user?.id], queryFn: listCases, enabled: Boolean(user) });
@@ -23,7 +23,7 @@ export function SavedEvidence({ initialCase = '', title = 'Ranked List' }: { ini
   const mapPoints: MapPoint[] = (evidence.data ?? [])
     .filter((item) => item.latitude !== null && item.longitude !== null)
     .sort((a, b) => (a.captured_at ?? a.created_at).localeCompare(b.captured_at ?? b.created_at))
-    .map((item) => ({ id: item.id, label: item.camera_id || item.filename, detail: item.location || undefined, lat: item.latitude as number, lng: item.longitude as number, time: item.captured_at ? new Date(item.captured_at).toLocaleString() : undefined }));
+    .map((item) => ({ id: item.id, label: item.camera_id || 'Evidence location', detail: `${item.filename}${item.location ? ` · ${item.location}` : ''}`, lat: item.latitude as number, lng: item.longitude as number, time: item.captured_at ? new Date(item.captured_at).toLocaleString() : undefined }));
   return <AppShell title={title} eyebrow="Cases">
     <Field label="Case"><select value={caseId} onChange={(e) => setChosen(e.target.value)}><option value="">Select a case</option>{cases.data?.map((c) => <option key={c.id} value={c.id}>{c.title} · {c.id}</option>)}</select></Field>
     {cases.isPending && <p role="status">Loading cases…</p>}
@@ -32,13 +32,13 @@ export function SavedEvidence({ initialCase = '', title = 'Ranked List' }: { ini
     {current && <section className="form-section saved-case-summary"><SectionHeader title={current.title} /><p>{current.description || 'No incident details recorded.'}</p><p><strong>Search description:</strong> {current.query || 'Not provided'}</p><p><strong>Subject:</strong> {current.subject} · <strong>Investigator:</strong> {current.investigator}</p>
       {current.attributes.length > 0 && <div className="attribute-tags">{current.attributes.map((tag) => <span key={tag}>{tag}</span>)}</div>}
     </section>}
-    {caseId && <section className="form-section"><SectionHeader title="Movement route" description="Camera positions plotted in time order, connected as the subject's movement path." /><MapSection points={mapPoints} /></section>}
+    {caseId && <section className="form-section"><SectionHeader title="Evidence map" description="Saved evidence with coordinates is numbered in capture order and plotted at its recorded location." /><MapSection points={mapPoints} /></section>}
     {caseId && <><section className="form-section evidence-upload-section"><SectionHeader title="Add evidence" description="Upload additional images or videos and record each camera position." />
       <Field label="Add files (JPG, PNG, MP4, WebM · up to 50 MB each)"><input type="file" multiple accept=".jpg,.jpeg,.png,.mp4,.webm" disabled={uploading} onChange={(e) => { void selectNewFiles(e.target.files); e.target.value = ''; }} /></Field>
       {newFiles.map((item) => <NewEvidenceRow key={item.id} item={item} update={(changes) => setNewFiles((current) => current.map((file) => file.id === item.id ? { ...file, ...changes } : file))} remove={() => setNewFiles((current) => current.filter((file) => file.id !== item.id))} />)}
       {uploadError && <p className="error-message" role="alert">{uploadError}</p>}
       {newFiles.length > 0 && <Button disabled={uploading} onClick={() => void uploadNewFiles()}>{uploading ? 'Uploading…' : 'Upload selected evidence'}</Button>}
-    </section><SectionHeader title="Uploaded evidence" action={<input className="evidence-filter" aria-label="Filter uploaded evidence" placeholder="Filter files or cameras" value={filter} onChange={(e) => setFilter(e.target.value)} />} />
+    </section><SectionHeader title="Case evidence history" description="All uploads saved to this case, including their camera and location metadata." action={<input className="evidence-filter" aria-label="Filter uploaded evidence" placeholder="Filter files or cameras" value={filter} onChange={(e) => setFilter(e.target.value)} />} />
       {evidence.isPending && <p role="status">Loading evidence…</p>}
       {evidence.isError && <p role="alert" className="error-message">Could not load evidence. <Button variant="ghost" onClick={() => void evidence.refetch()}>Retry</Button></p>}
       {evidence.data?.length === 0 && <p>No evidence has been uploaded to this case.</p>}

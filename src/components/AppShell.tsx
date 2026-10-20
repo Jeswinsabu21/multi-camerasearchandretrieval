@@ -8,7 +8,7 @@ import { Button } from './Button';
 
 const navigation = [
   { to: "/create-case", label: "Create Case" },
-  { to: "/results", label: "Ranked List" },
+  { to: "/results", label: "Case Details" },
   { to: "/case-history", label: "Case History" },
 ] as const;
 
