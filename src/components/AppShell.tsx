@@ -39,10 +39,7 @@ export function AppShell({ title, children }: { title: string; eyebrow: string; 
           <h1>MULTI CAMERA SEARCH PROJECT</h1>
           <div className="header-auth">
             {!ready ? null : user ? (
-              <>
-                <span className="header-user">{user.email}</span>
-                <Button variant="secondary" onClick={() => void signOut()}><LogOut size={15} /> Sign out</Button>
-              </>
+              <Button variant="secondary" onClick={() => void signOut()}><LogOut size={15} /> Sign out</Button>
             ) : (
               <Button variant="secondary"><LogIn size={15} /> Sign in</Button>
             )}

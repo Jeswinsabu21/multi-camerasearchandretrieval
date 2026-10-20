@@ -46,3 +46,7 @@ export async function reviewEvidence(id: string, status: typeof REVIEW_STATUSES[
   const { data, error } = await supabase.from('case_evidence').update({ review_status: status, review_note: note, reviewed_at: new Date().toISOString() }).eq('id', id).select('id').single();
   if (error || !data) throw error ?? new Error('Evidence is no longer available.');
 }
+export async function updateEvidence(id: string, metadata: { camera_id: string; location: string; captured_at: string | null; notes: string; latitude: number | null; longitude: number | null }) {
+  const { data, error } = await supabase.from('case_evidence').update(metadata).eq('id', id).select('id').single();
+  if (error || !data) throw error ?? new Error('Evidence is no longer available.');
+}
