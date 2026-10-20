@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { useQueryClient } from '@tanstack/react-query';
+import { LogIn, LogOut } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { SignInForm, useAuth } from './Auth';
 import { Button } from './Button';
@@ -20,19 +21,42 @@ export function AppShell({ title, children }: { title: string; eyebrow: string; 
     const { error } = await supabase.auth.signOut();
     if (error) window.alert('Sign-out failed. Please retry.');
   }
+  if (ready && !user) {
+    return (
+      <div className="app-shell">
+        <main className="signin-screen">
+          <h1 className="signin-title">MULTI CAMERA SEARCH PROJECT</h1>
+          <SignInForm />
+          <footer className="responsible-notice">Automated search candidates require human verification.</footer>
+        </main>
+      </div>
+    );
+  }
   return (
     <div className="app-shell">
       <header className="project-header">
-        <h1>MULTI CAMERA SEARCH PROJECT</h1>
+        <div className="project-header-row">
+          <h1>MULTI CAMERA SEARCH PROJECT</h1>
+          <div className="header-auth">
+            {!ready ? null : user ? (
+              <>
+                <span className="header-user">{user.email}</span>
+                <Button variant="secondary" onClick={() => void signOut()}><LogOut size={15} /> Sign out</Button>
+              </>
+            ) : (
+              <Button variant="secondary"><LogIn size={15} /> Sign in</Button>
+            )}
+          </div>
+        </div>
         <nav className="project-nav" aria-label="Primary navigation">
           {navigation.map(({ to, label }) => {
-            const active = pathname === to || (to === "/create-case" && (pathname === "/" || pathname === "/process-case"));
+            const active = pathname === to || (to === "/create-case" && pathname === "/");
             return <Link key={to} to={to} className={active ? "project-tab active" : "project-tab"} aria-current={active ? "page" : undefined}>{label}</Link>;
           })}
         </nav>
       </header>
       <main className="main-content">
-        <div className="page-content"><div className="workspace-heading"><h2 className="page-heading">{title}</h2>{user && <Button variant="ghost" onClick={() => void signOut()}>Sign out</Button>}</div>{!ready ? <p role="status">Loading…</p> : user ? children : <SignInForm />}</div>
+        <div className="page-content"><div className="workspace-heading"><h2 className="page-heading">{title}</h2></div>{!ready ? <p role="status">Loading…</p> : children}</div>
         <footer className="responsible-notice">Automated search candidates require human verification.</footer>
       </main>
     </div>

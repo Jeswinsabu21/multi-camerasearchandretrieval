@@ -3,6 +3,12 @@
 - [x] Open the create-case workspace instead of the dashboard
 - [x] Simplify page surfaces and verify navigation and layout
 - [x] Enable Lovable Cloud for the backend
-- [ ] Add secure sign-in, private uploads, and owner-scoped case records
-- [ ] Replace sample forms, results, processing, evidence, and case history with real records and honest empty states
-- [ ] Verify upload, saved-case history, and access isolation
+- [x] Add secure sign-in, private uploads, and owner-scoped case records
+- [ ] Separate sign-in screen without navigation tabs; sign in/out button at top right
+- [ ] Add latitude/longitude per camera evidence and a map that locates entered coordinates
+- [ ] Replace hardcoded attributes with attributes generated from the selected subject/description
+- [ ] Ranked list shows only real uploaded images (no generated-looking visuals)
+- [ ] Movement route map connecting detected locations in time order (core project idea)
+- [ ] Replace mock results, processing, evidence, and case history pages with real records
+- [ ] Professional visual polish (not "vibe coded")
+- [ ] Verify upload, saved-case history, map, and access isolation
